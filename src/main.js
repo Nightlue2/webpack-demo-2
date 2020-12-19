@@ -1,3 +1,4 @@
-import "./style.css";
-import "./test.png";
-console.log("hello");
+// import "./test.png";
+require("./style.css");
+import "./style.less";
+console.log("hello world");

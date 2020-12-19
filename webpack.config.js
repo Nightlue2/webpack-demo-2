@@ -6,16 +6,28 @@ module.exports = {
   output: {
     filename: "js/[name].[contenthash:10].js",
     path: resolve(__dirname, "./build"),
-    publicPath: "./",
   },
   module: {
     rules: [
+      // {
+      //   test: /\.html$/,
+      //   loader: "html-loader",
+      // },
+      {
+        test: /\.less$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          "css-loader",
+          "less-loader",
+        ],
+      },
       {
         test: /\.css$/i,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: "/" },
           },
           "css-loader",
         ],
@@ -28,26 +40,15 @@ module.exports = {
           limit: 4 * 1024,
         },
       },
-      // {
-      //   test: /\.png$/,
-      //   loader: "file-loader",
-      // },
-      {
-        test: /\.html$/,
-        loader: "html-loader",
-      },
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: "fuck webpack",
-      filename: "html/index.html",
-    }),
-    // new HtmlWebpackPlugin({
-    //   filename: "html/a.html",
-    //   template: "./src/a.html",
-    // }),
     new MiniCssExtractPlugin({}),
+    new HtmlWebpackPlugin({
+      title: "happy webpack",
+      filename: "html/index.html",
+      template: "src/index.html",
+    }),
   ],
   mode: "development",
 };
